@@ -123,7 +123,10 @@ class NoteListState extends State<NoteList> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Expanded(
-                            child: Text(this.noteList[index].description,
+                            child: Text(
+                                this.noteList[index].description == null
+                                    ? ''
+                                    : this.noteList[index].description,
                                 style: Theme.of(context).textTheme.body2),
                           )
                         ],

@@ -24,6 +24,7 @@ class NoteDetailState extends State<NoteDetail> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   int color;
+  bool isEdited = false;
 
   NoteDetailState(this.note, this.appBarTitle);
 
@@ -34,7 +35,7 @@ class NoteDetailState extends State<NoteDetail> {
     color = note.color;
     return WillPopScope(
         onWillPop: () {
-          showDiscardDialog(context);
+          isEdited ? showDiscardDialog(context) : moveToLastScreen();
         },
         child: Scaffold(
           appBar: AppBar(
@@ -47,7 +48,7 @@ class NoteDetailState extends State<NoteDetail> {
             leading: IconButton(
                 icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                 onPressed: () {
-                  showDiscardDialog(context);
+                  isEdited ? showDiscardDialog(context) : moveToLastScreen();
                 }),
             actions: <Widget>[
               IconButton(
@@ -55,7 +56,11 @@ class NoteDetailState extends State<NoteDetail> {
                   Icons.save,
                   color: Colors.black,
                 ),
-                onPressed: _save,
+                onPressed: () {
+                  titleController.text.length == 0
+                      ? showEmptyTitleDialog(context)
+                      : _save();
+                },
               ),
               IconButton(
                 icon: Icon(Icons.delete, color: Colors.black),
@@ -72,6 +77,7 @@ class NoteDetailState extends State<NoteDetail> {
                 PriorityPicker(
                   selectedIndex: 3 - note.priority,
                   onTap: (index) {
+                    isEdited = true;
                     note.priority = 3 - index;
                   },
                 ),
@@ -81,6 +87,7 @@ class NoteDetailState extends State<NoteDetail> {
                     setState(() {
                       color = index;
                     });
+                    isEdited = true;
                     note.color = index;
                   },
                 ),
@@ -125,6 +132,8 @@ class NoteDetailState extends State<NoteDetail> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
           title: Text(
             "Discard Changes?",
             style: Theme.of(context).textTheme.body1,
@@ -159,11 +168,43 @@ class NoteDetailState extends State<NoteDetail> {
     );
   }
 
+  void showEmptyTitleDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          title: Text(
+            "Title is empty!",
+            style: Theme.of(context).textTheme.body1,
+          ),
+          content: Text('The title of the note cannot be empty.',
+              style: Theme.of(context).textTheme.body2),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Okay",
+                  style: Theme.of(context)
+                      .textTheme
+                      .body1
+                      .copyWith(color: Colors.purple)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void showDeleteDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
           title: Text(
             "Delete Note?",
             style: Theme.of(context).textTheme.body1,
@@ -203,10 +244,12 @@ class NoteDetailState extends State<NoteDetail> {
   }
 
   void updateTitle() {
+    isEdited = true;
     note.title = titleController.text;
   }
 
   void updateDescription() {
+    isEdited = true;
     note.description = descriptionController.text;
   }
 
