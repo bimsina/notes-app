@@ -104,7 +104,7 @@ class NoteListState extends State<NoteList> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              this.noteList[index].title,
+                              this.noteList[index].title!=null?this.noteList[index].title:"No Title",
                               style: Theme.of(context).textTheme.body1,
                             ),
                           ),
@@ -123,7 +123,7 @@ class NoteListState extends State<NoteList> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Expanded(
-                            child: Text(this.noteList[index].description,
+                            child: Text(this.noteList[index].description!=null?this.noteList[index].description:"No Description",
                                 style: Theme.of(context).textTheme.body2),
                           )
                         ],
