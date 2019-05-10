@@ -4,6 +4,7 @@ import 'package:notes_app/db_helper/db_helper.dart';
 import 'package:notes_app/modal_class/notes.dart';
 import 'package:notes_app/screens/note_detail.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:notes_app/screens/search_note.dart';
 import 'package:notes_app/utils/widgets.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -27,33 +28,47 @@ class NoteListState extends State<NoteList> {
       updateListView();
     }
 
-    return Scaffold(
-      appBar: AppBar(
+    Widget myAppBar() {
+      return AppBar(
         title: Text('Notes', style: Theme.of(context).textTheme.headline),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu,
-            color: Colors.black,
-          ),
-          onPressed: () {},
-        ),
+        leading: noteList.length == 0
+            ? Container()
+            : IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.black,
+                ),
+                onPressed: () async {
+                  final Note result = await showSearch(
+                      context: context, delegate: NotesSearch(notes: noteList));
+                  if (result != null) {
+                    navigateToDetail(result, 'Edit Note');
+                  }
+                },
+              ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              axisCount == 2 ? Icons.list : Icons.grid_on,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              setState(() {
-                axisCount = axisCount == 2 ? 4 : 2;
-              });
-            },
-          )
+          noteList.length == 0
+              ? Container()
+              : IconButton(
+                  icon: Icon(
+                    axisCount == 2 ? Icons.list : Icons.grid_on,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      axisCount = axisCount == 2 ? 4 : 2;
+                    });
+                  },
+                )
         ],
-      ),
+      );
+    }
+
+    return Scaffold(
+      appBar: myAppBar(),
       body: noteList.length == 0
           ? Container(
               color: Colors.white,
@@ -65,7 +80,10 @@ class NoteListState extends State<NoteList> {
                 ),
               ),
             )
-          : getNotesList(),
+          : Container(
+              color: Colors.white,
+              child: getNotesList(),
+            ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           navigateToDetail(Note('', '', 3, 0), 'Add Note');

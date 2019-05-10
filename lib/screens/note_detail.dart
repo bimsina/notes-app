@@ -95,6 +95,7 @@ class NoteDetailState extends State<NoteDetail> {
                   padding: EdgeInsets.all(16.0),
                   child: TextField(
                     controller: titleController,
+                    maxLength: 255,
                     style: Theme.of(context).textTheme.body1,
                     onChanged: (value) {
                       updateTitle();
@@ -110,6 +111,7 @@ class NoteDetailState extends State<NoteDetail> {
                     child: TextField(
                       keyboardType: TextInputType.multiline,
                       maxLines: 10,
+                      maxLength: 255,
                       controller: descriptionController,
                       style: Theme.of(context).textTheme.body2,
                       onChanged: (value) {
