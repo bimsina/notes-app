@@ -51,7 +51,9 @@ class NoteListState extends State<NoteList> {
               ),
         actions: <Widget>[
           noteList.length == 0
-              ? Container()
+              ? Container(
+
+          )
               : IconButton(
                   icon: Icon(
                     axisCount == 2 ? Icons.list : Icons.grid_on,
