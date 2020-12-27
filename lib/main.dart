@@ -14,22 +14,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
         textTheme: TextTheme(
-          headline: TextStyle(
+          headline1: TextStyle(
               fontFamily: 'Sans',
               fontWeight: FontWeight.bold,
               color: Colors.black,
               fontSize: 24),
-          body1: TextStyle(
+          bodyText1: TextStyle(
               fontFamily: 'Sans',
               fontWeight: FontWeight.bold,
               color: Colors.black,
               fontSize: 20),
-          body2: TextStyle(
+          bodyText2: TextStyle(
               fontFamily: 'Sans',
               fontWeight: FontWeight.normal,
               color: Colors.black,
               fontSize: 18),
-          subtitle: TextStyle(
+          subtitle1: TextStyle(
               fontFamily: 'Sans',
               fontWeight: FontWeight.normal,
               color: Colors.black,
