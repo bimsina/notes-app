@@ -98,7 +98,7 @@ class DatabaseHelper {
     int count =
         noteMapList.length; // Count the number of map entries in db table
 
-    List<Note> noteList = List<Note>();
+    List<Note> noteList = [];
     // For loop to create a 'Note List' from a 'Map List'
     for (int i = 0; i < count; i++) {
       noteList.add(Note.fromMapObject(noteMapList[i]));

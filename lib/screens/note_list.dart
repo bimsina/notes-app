@@ -24,13 +24,13 @@ class NoteListState extends State<NoteList> {
   @override
   Widget build(BuildContext context) {
     if (noteList == null) {
-      noteList = List<Note>();
+      noteList = [];
       updateListView();
     }
 
     Widget myAppBar() {
       return AppBar(
-        title: Text('Notes', style: Theme.of(context).textTheme.headline),
+        title: Text('Notes', style: Theme.of(context).textTheme.headline5),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
@@ -51,9 +51,7 @@ class NoteListState extends State<NoteList> {
               ),
         actions: <Widget>[
           noteList.length == 0
-              ? Container(
-
-          )
+              ? Container()
               : IconButton(
                   icon: Icon(
                     axisCount == 2 ? Icons.list : Icons.grid_on,
@@ -78,7 +76,7 @@ class NoteListState extends State<NoteList> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text('Click on the add button to add a new note!',
-                      style: Theme.of(context).textTheme.body1),
+                      style: Theme.of(context).textTheme.bodyText2),
                 ),
               ),
             )
@@ -104,65 +102,65 @@ class NoteListState extends State<NoteList> {
       crossAxisCount: 4,
       itemCount: count,
       itemBuilder: (BuildContext context, int index) => GestureDetector(
-            onTap: () {
-              navigateToDetail(this.noteList[index], 'Edit Note');
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                    color: colors[this.noteList[index].color],
-                    border: Border.all(width: 2, color: Colors.black),
-                    borderRadius: BorderRadius.circular(8.0)),
-                child: Column(
+        onTap: () {
+          navigateToDetail(this.noteList[index], 'Edit Note');
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            padding: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+                color: colors[this.noteList[index].color],
+                border: Border.all(width: 2, color: Colors.black),
+                borderRadius: BorderRadius.circular(8.0)),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              this.noteList[index].title,
-                              style: Theme.of(context).textTheme.body1,
-                            ),
-                          ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          this.noteList[index].title,
+                          style: Theme.of(context).textTheme.bodyText2,
                         ),
-                        Text(
-                          getPriorityText(this.noteList[index].priority),
-                          style: TextStyle(
-                              color: getPriorityColor(
-                                  this.noteList[index].priority)),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Expanded(
-                            child: Text(
-                                this.noteList[index].description == null
-                                    ? ''
-                                    : this.noteList[index].description,
-                                style: Theme.of(context).textTheme.body2),
-                          )
-                        ],
                       ),
                     ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Text(this.noteList[index].date,
-                              style: Theme.of(context).textTheme.subtitle),
-                        ])
+                    Text(
+                      getPriorityText(this.noteList[index].priority),
+                      style: TextStyle(
+                          color:
+                              getPriorityColor(this.noteList[index].priority)),
+                    ),
                   ],
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                            this.noteList[index].description == null
+                                ? ''
+                                : this.noteList[index].description,
+                            style: Theme.of(context).textTheme.bodyText1),
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(this.noteList[index].date,
+                          style: Theme.of(context).textTheme.subtitle2),
+                    ])
+              ],
             ),
           ),
+        ),
+      ),
       staggeredTileBuilder: (int index) => StaggeredTile.fit(axisCount),
       mainAxisSpacing: 4.0,
       crossAxisSpacing: 4.0,
