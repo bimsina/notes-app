@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/startpage.dart';
+import 'package:notes_app/screens/start_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 

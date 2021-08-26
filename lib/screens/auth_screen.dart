@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:notes_app/Auth.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:notes_app/auth.dart';
 import 'package:notes_app/screens/note_list.dart';
-import 'Signup.dart';
+import 'package:notes_app/screens/start_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class Login extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
 
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpPageState createState() => _SignUpPageState();
+
 }
 
-class _LoginState extends State<Login> {
+class _SignUpPageState extends State<SignUpPage> {
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _pwdController = TextEditingController();
   bool circular = false;
+  bool authFlag = true;
   AuthClass authClass = AuthClass();
 
   @override
@@ -30,7 +32,7 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Sign In",
+                authFlag?"Sign Up":"Sign In",
                 style: TextStyle(
                   fontSize: 35,
                   color: Colors.white,
@@ -40,14 +42,13 @@ class _LoginState extends State<Login> {
               SizedBox(
                 height: 20,
               ),
-
-              buttonItem("assets/google.svg", "Continue with Google", 25, () {
-                authClass.googleSignIn(context);
-              }),
+              buttonItem("assets/google.svg", "Continue with Google", 25,
+                      () async {
+                    await authClass.googleSignIn(context);
+                  }),
               SizedBox(
                 height: 15,
               ),
-
               Text(
                 "Or",
                 style: TextStyle(color: Colors.white, fontSize: 18),
@@ -71,7 +72,7 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "If you don't have an Account? ",
+                    "If you already have an Account? ",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -79,13 +80,23 @@ class _LoginState extends State<Login> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (builder) => SignUpPage()),
-                              (route) => false);
+                      // Navigator.pushAndRemoveUntil(
+                      //     context,
+                      //     MaterialPageRoute(builder: (builder) => Login()),
+                      //         (route) => false);
+
+                      setState(() {
+                        if(authFlag){
+                          authFlag= false;
+                        }
+                        else{
+                          authFlag= true;
+                        }
+
+                      });
                     },
                     child: Text(
-                      "SignUp",
+                      authFlag?"Login":"SignUp",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -95,10 +106,6 @@ class _LoginState extends State<Login> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
-              ),
-
             ],
           ),
         ),
@@ -109,25 +116,55 @@ class _LoginState extends State<Login> {
   Widget colorButton() {
     return InkWell(
       onTap: () async {
-        try {
-          firebase_auth.UserCredential userCredential =
-          await firebaseAuth.signInWithEmailAndPassword(
-              email: _emailController.text, password: _pwdController.text);
-          print(userCredential.user.email);
-          setState(() {
-            circular = false;
-          });
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (builder) => NoteList()),
-                  (route) => false);
-        } catch (e) {
-          final snackbar = SnackBar(content: Text(e.toString()));
-          ScaffoldMessenger.of(context).showSnackBar(snackbar);
-          setState(() {
-            circular = false;
-          });
+
+        if(authFlag){
+
+          try {
+            firebase_auth.UserCredential userCredential =
+            await firebaseAuth.createUserWithEmailAndPassword(
+                email: _emailController.text, password: _pwdController.text);
+            print(userCredential.user.email);
+            setState(() {
+              circular = false;
+            });
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (builder) => NoteList()),
+                    (route) => false);
+          } catch (e) {
+            final snackbar = SnackBar(content: Text(e.toString()));
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+            setState(() {
+              circular = false;
+            });
+          }
+
         }
+        else{
+          // setState(() {
+          //   circular = true;
+          // });
+          try {
+            firebase_auth.UserCredential userCredential =
+            await firebaseAuth.signInWithEmailAndPassword(
+                email: _emailController.text, password: _pwdController.text);
+            print(userCredential.user.email);
+            setState(() {
+              circular = false;
+            });
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (builder) => NoteList()),
+                    (route) => false);
+          } catch (e) {
+            final snackbar = SnackBar(content: Text(e.toString()));
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+            setState(() {
+              circular = false;
+            });
+          }
+        }
+
       },
       child: Container(
         width: MediaQuery.of(context).size.width - 100,
@@ -144,7 +181,7 @@ class _LoginState extends State<Login> {
           child: circular
               ? CircularProgressIndicator()
               : Text(
-            "Sign In",
+            authFlag?"Sign Up":"Sign In",
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,

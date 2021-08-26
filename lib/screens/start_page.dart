@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/Login.dart';
 import 'package:notes_app/screens/note_list.dart';
-import 'package:notes_app/Auth.dart';
-import 'package:notes_app/Signup.dart';
+import 'package:notes_app/auth.dart';
+import 'package:notes_app/screens/auth_screen.dart';
 
 class startpage extends StatefulWidget {
 
@@ -12,7 +11,7 @@ class startpage extends StatefulWidget {
 
 class _startpageState extends State<startpage> {
   AuthClass authClass = AuthClass();
-  Widget currentPage = Login();
+  Widget currentPage = SignUpPage();
 
   @override
   void initState() {
@@ -22,9 +21,9 @@ class _startpageState extends State<startpage> {
   }
 
   checkLogin() async {
-    String tokne = await authClass.getToken();
-    print("tokne");
-    if (tokne != null)
+    String token = await authClass.getToken();
+    print("token");
+    if (token != null)
       setState(() {
         currentPage = NoteList();
       });
