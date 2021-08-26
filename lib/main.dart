@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app/screens/note_list.dart';
+import 'package:notes_app/startpage.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -10,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'NoteKeeper',
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
         textTheme: TextTheme(
@@ -36,7 +40,7 @@ class MyApp extends StatelessWidget {
               fontSize: 14),
         ),
       ),
-      home: NoteList(),
+      home: startpage(),
     );
   }
 }

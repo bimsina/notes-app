@@ -9,10 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^1.0.3
+  firebase_auth: ^1.2.0
   sqflite: 2.0.0+3
   path_provider: 2.0.1
   intl: 0.17.0
   flutter_staggered_grid_view: 0.4.0
+  google_sign_in: ^4.5.1
+  flutter_svg: ^0.22.0
+  flutter_secure_storage: ^4.2.0
 
 dev_dependencies:
   flutter_test:
@@ -22,9 +27,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  assets:
+    - assets/logos/
+    - assets/google.svg
+  #    - assets/images/
   fonts:
     - family: Sans
       fonts:
