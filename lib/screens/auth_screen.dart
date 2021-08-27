@@ -72,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "If you already have an Account? ",
+                    authFlag?"If you already have an Account? ":"If you don't have an Account? ",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,

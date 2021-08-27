@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "822746051820",
+    "project_id": "notes-ad906",
+    "storage_bucket": "notes-ad906.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822746051820:android:33b1e10941e7d3d6d9a1c9",
+        "android_client_info": {
+          "package_name": "com.bimsina.notes_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822746051820-0an0hv605qtsgaa751b09bfk5vnamdfp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bimsina.notes_app",
+            "certificate_hash": "8b9c9a54fb5bea44363341ec0090dc3089d5c294"
+          }
+        },
+        {
+          "client_id": "822746051820-ved68gv3bins1326ho7l2eq0gd9r8bfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKWGLBw4G8sYTngmDt9m87lDZGDr0keKs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822746051820-ved68gv3bins1326ho7l2eq0gd9r8bfm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
