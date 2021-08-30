@@ -1,3 +1,6 @@
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:notes_app/utils/widgets.dart';
+
 import '../auth.dart';
 import 'auth_screen.dart';
 import 'view_note.dart';
@@ -57,8 +60,9 @@ class NoteListState extends State<NoteList> {
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: myAppBar(),
-        body: FutureBuilder(
+        body:FutureBuilder(
           future: ref.get(),
             builder: (context, snapshot){
               if (snapshot.data == null){
@@ -93,35 +97,60 @@ class NoteListState extends State<NoteList> {
                         setState(() {});
                       });
                     },
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              "${data['title']}",
-                              style: TextStyle(
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold,
-                                color: getPriorityColor(data['priority']),
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "${data['description']}",
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  color: Colors.black87,
+                          child:Container(
+                            height: 190,
+                            child: Container(
+                              child: Card(
+                                elevation: 15.0,
+                                color: colors[int.parse("${data['color']}")],
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Container(
+                                            child: Text(
+                                              "${data['title']}",
+                                              style: TextStyle(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Text(
+                                          getPriorityText(data['priority']),
+                                          style: TextStyle(
+                                            color:
+                                            getPriorityColor(data['priority']),
+                                          ),
+                                        )],
+                                    ),
+
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                "${data['description']}",
+                                                style: TextStyle(
+                                                  fontSize: 18.0,
+                                                  color: Colors.black87,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                  ],
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                  }
+                            ),
+                          ),
+                    );
+                }
               );
             }
 
@@ -145,14 +174,14 @@ class NoteListState extends State<NoteList> {
         return Colors.red;
         break;
       case 2:
-        return Colors.orange.shade700;
+        return Colors.yellow[800];
         break;
       case 3:
-        return Colors.green.shade900;
+        return Colors.green;
         break;
 
       default:
-        return Colors.green.shade900;
+        return Colors.yellow;
     }
   }
 
