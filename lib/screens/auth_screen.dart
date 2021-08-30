@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:notes_app/auth.dart';
 import 'package:notes_app/screens/note_list.dart';
-import 'package:notes_app/screens/start_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -22,91 +21,93 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: Colors.black,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                authFlag?"Sign Up":"Sign In",
-                style: TextStyle(
-                  fontSize: 35,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              buttonItem("assets/google.svg", "Continue with Google", 25,
-                      () async {
-                    await authClass.googleSignIn(context);
-                  }),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                "Or",
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              textItem("Email", _emailController, false),
-              SizedBox(
-                height: 15,
-              ),
-              textItem("Password", _pwdController, true),
-              SizedBox(
-                height: 40,
-              ),
-              colorButton(),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    authFlag?"If you already have an Account? ":"If you don't have an Account? ",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.black,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  authFlag?"Sign Up":"Sign In",
+                  style: TextStyle(
+                    fontSize: 35,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
-                  InkWell(
-                    onTap: () {
-                      // Navigator.pushAndRemoveUntil(
-                      //     context,
-                      //     MaterialPageRoute(builder: (builder) => Login()),
-                      //         (route) => false);
-
-                      setState(() {
-                        if(authFlag){
-                          authFlag= false;
-                        }
-                        else{
-                          authFlag= true;
-                        }
-
-                      });
-                    },
-                    child: Text(
-                      authFlag?"Login":"SignUp",
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                buttonItem("assets/google.svg", "Continue with Google", 25,
+                        () async {
+                      await authClass.googleSignIn(context);
+                    }),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  "Or",
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+                SizedBox(
+                  height: 18,
+                ),
+                textItem("Email", _emailController, false),
+                SizedBox(
+                  height: 15,
+                ),
+                textItem("Password", _pwdController, true),
+                SizedBox(
+                  height: 40,
+                ),
+                colorButton(),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      authFlag?"If you already have an Account? ":"If you don't have an Account? ",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
-                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    InkWell(
+                      onTap: () {
+                        // Navigator.pushAndRemoveUntil(
+                        //     context,
+                        //     MaterialPageRoute(builder: (builder) => Login()),
+                        //         (route) => false);
+
+                        setState(() {
+                          if(authFlag){
+                            authFlag= false;
+                          }
+                          else{
+                            authFlag= true;
+                          }
+
+                        });
+                      },
+                      child: Text(
+                        authFlag?"Login":"SignUp",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
