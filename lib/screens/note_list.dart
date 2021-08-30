@@ -1,4 +1,5 @@
 import '../auth.dart';
+import 'auth_screen.dart';
 import 'view_note.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,7 @@ import 'package:notes_app/modal_class/notes.dart';
 import 'package:notes_app/screens/note_detail.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'note_detail.dart';
+
 
 class NoteList extends StatefulWidget {
   @override
@@ -38,6 +40,17 @@ class NoteListState extends State<NoteList> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
+
+        leading: IconButton(
+          icon: Icon(
+            Icons.logout,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            authClass.signOut();
+            navigateToSignUp();
+          },
+        ),
 
       );
     }
@@ -168,6 +181,10 @@ class NoteListState extends State<NoteList> {
     if (result == true) {
       updateListView();
     }
+  }
+
+  void navigateToSignUp() async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpPage()));
   }
 
   void updateListView() {
