@@ -1,8 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:notes_app/utils/widgets.dart';
-
 import '../auth.dart';
 import 'auth_screen.dart';
 import 'view_note.dart';
@@ -52,8 +48,7 @@ class NoteListState extends State<NoteList> {
             color: Colors.black,
           ),
           onPressed: () {
-            authClass.signOut();
-            navigateToSignUp();
+            showLogoutDialog(context);
           },
         ),
 
@@ -176,6 +171,48 @@ class NoteListState extends State<NoteList> {
           backgroundColor: Colors.white,
         ),
       ),
+    );
+  }
+
+  void showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          title: Text(
+            "Logging Out!!!",
+            style: Theme.of(context).textTheme.bodyText2,
+          ),
+          content: Text("Are you sure?",
+              style: Theme.of(context).textTheme.bodyText1),
+          actions: <Widget>[
+            TextButton(
+              child: Text("No",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .copyWith(color: Colors.purple)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text("Yes",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .copyWith(color: Colors.purple)),
+              onPressed: () {
+                Navigator.of(context).pop();
+                authClass.signOut();
+                navigateToSignUp();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
