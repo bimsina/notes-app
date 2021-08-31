@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:notes_app/utils/widgets.dart';
 
@@ -65,10 +67,15 @@ class NoteListState extends State<NoteList> {
         body:FutureBuilder(
           future: ref.get(),
             builder: (context, snapshot){
-              if (snapshot.data == null){
-                return Center(
-                  child: Text(
-                    'Click on the add button to add a new note!',
+              if (snapshot.data.docs.length==0){
+                return Container(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  child: Center(
+                    child: Text(
+                      'Click on the add button to add a new note!',
+
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 );
               }
@@ -97,54 +104,58 @@ class NoteListState extends State<NoteList> {
                         setState(() {});
                       });
                     },
-                          child:Container(
-                            height: 190,
+                          child:Padding(
+                            padding: const EdgeInsets.all(5.0),
                             child: Container(
+                              height: 190,
                               child: Card(
-                                elevation: 15.0,
+                                elevation: 10.0,
                                 color: colors[int.parse("${data['color']}")],
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Expanded(
-                                          child: Container(
-                                            child: Text(
-                                              "${data['title']}",
-                                              style: TextStyle(
-                                                fontSize: 20.0,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Text(
-                                          getPriorityText(data['priority']),
-                                          style: TextStyle(
-                                            color:
-                                            getPriorityColor(data['priority']),
-                                          ),
-                                        )],
-                                    ),
-
+                                child: Padding(
+                                  padding: EdgeInsets.all(10.0),
+                                  child: Column(
+                                    children: [
                                       Row(
-                                        children: [
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: <Widget>[
                                           Expanded(
                                             child: Container(
-                                              alignment: Alignment.centerLeft,
                                               child: Text(
-                                                "${data['description']}",
+                                                "${data['title']}",
                                                 style: TextStyle(
-                                                  fontSize: 18.0,
-                                                  color: Colors.black87,
+                                                  fontSize: 20.0,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ],
+                                          Text(
+                                            getPriorityText(data['priority']),
+                                            style: TextStyle(
+                                              color:
+                                              getPriorityColor(data['priority']),
+                                            ),
+                                          )],
                                       ),
-                                  ],
+
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Container(
+                                                alignment: Alignment.centerLeft,
+                                                child: Text(
+                                                  "${data['description']}",
+                                                  style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    color: Colors.black87,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
