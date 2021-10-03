@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bimsina.notes_app">
+    package="com.beodroid.mynotes">
    <application
         android:label="Note Keeper"
         android:icon="@mipmap/ic_launcher">

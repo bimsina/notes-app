@@ -1,4 +1,4 @@
-package com.bimsina.notes_app
+package com.beodroid.mynotes
 
 import io.flutter.embedding.android.FlutterActivity
 
