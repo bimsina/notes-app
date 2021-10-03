@@ -120,6 +120,7 @@ class NoteListState extends State<NoteList> {
                   child: Text(
                     'Click on the add button to add a new note!',
                     style: Theme.of(context).textTheme.bodyText2,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
