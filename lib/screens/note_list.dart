@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:notes_app/db_helper/db_helper.dart';
-import 'package:notes_app/modal_class/notes.dart';
-import 'package:notes_app/screens/note_about.dart';
-import 'package:notes_app/screens/note_detail.dart';
+import 'package:mynotes/db_helper/db_helper.dart';
+import 'package:mynotes/modal_class/notes.dart';
+import 'package:mynotes/screens/note_about.dart';
+import 'package:mynotes/screens/note_detail.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:notes_app/screens/search_note.dart';
-import 'package:notes_app/utils/widgets.dart';
+import 'package:mynotes/screens/search_note.dart';
+import 'package:mynotes/utils/widgets.dart';
 import 'package:sqflite/sqflite.dart';
 
 class NoteList extends StatefulWidget {

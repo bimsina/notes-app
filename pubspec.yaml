@@ -1,4 +1,4 @@
-name: notes_app
+name: mynotes
 description: A new Flutter project.
 
 version: 1.0.0+1
@@ -14,7 +14,7 @@ dependencies:
   intl: 0.17.0
   flutter_staggered_grid_view: 0.4.0
   change_app_package_name: ^1.0.0
-  
+
 
 dev_dependencies:
   flutter_test:
