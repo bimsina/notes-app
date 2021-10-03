@@ -14,7 +14,10 @@ class NotesSearch extends SearchDelegate<Note> {
         primaryColor: Colors.white,
         textTheme: TextTheme(
           headline6: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
         ));
     assert(theme != null);
     return theme;
@@ -26,7 +29,7 @@ class NotesSearch extends SearchDelegate<Note> {
       IconButton(
         icon: Icon(
           Icons.clear,
-          color: Colors.black,
+          color: Colors.white,
         ),
         onPressed: () {
           query = '';
@@ -40,7 +43,7 @@ class NotesSearch extends SearchDelegate<Note> {
     return IconButton(
       icon: Icon(
         Icons.arrow_back,
-        color: Colors.black,
+        color: Colors.white,
       ),
       onPressed: () {
         close(context, null);
@@ -52,7 +55,7 @@ class NotesSearch extends SearchDelegate<Note> {
   Widget buildResults(BuildContext context) {
     if (query == '') {
       return Container(
-        color: Colors.white,
+        color: Colors.blueGrey[800],
         child: Center(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,12 +67,12 @@ class NotesSearch extends SearchDelegate<Note> {
               child: Icon(
                 Icons.search,
                 size: 50,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
             Text(
               'Enter a note to search.',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             )
           ],
         )),
@@ -79,7 +82,7 @@ class NotesSearch extends SearchDelegate<Note> {
       getFilteredList(notes);
       if (filteredNotes.length == 0) {
         return Container(
-          color: Colors.white,
+          color: Colors.blueGrey[800],
           child: Center(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,33 +94,33 @@ class NotesSearch extends SearchDelegate<Note> {
                 child: Icon(
                   Icons.sentiment_dissatisfied,
                   size: 50,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               Text(
                 'No results found',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.white),
               )
             ],
           )),
         );
       } else {
         return Container(
-          color: Colors.white,
+          color: Colors.blueGrey[800],
           child: ListView.builder(
             itemCount: filteredNotes.length == null ? 0 : filteredNotes.length,
             itemBuilder: (context, index) {
               return ListTile(
                 leading: Icon(
                   Icons.note,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 title: Text(
                   filteredNotes[index].title,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
-                      color: Colors.black),
+                      color: Colors.white),
                 ),
                 subtitle: Text(
                   filteredNotes[index].description,
@@ -148,7 +151,7 @@ class NotesSearch extends SearchDelegate<Note> {
   Widget buildSuggestions(BuildContext context) {
     if (query == '') {
       return Container(
-        color: Colors.white,
+        color: Colors.blueGrey[800],
         child: Center(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -160,12 +163,12 @@ class NotesSearch extends SearchDelegate<Note> {
               child: Icon(
                 Icons.search,
                 size: 50,
-                color: Colors.black,
+                color: Colors.white,
               ),
             ),
             Text(
               'Enter a note to search.',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             )
           ],
         )),
@@ -175,7 +178,7 @@ class NotesSearch extends SearchDelegate<Note> {
       getFilteredList(notes);
       if (filteredNotes.length == 0) {
         return Container(
-          color: Colors.white,
+          color: Colors.blueGrey[800],
           child: Center(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -187,33 +190,33 @@ class NotesSearch extends SearchDelegate<Note> {
                 child: Icon(
                   Icons.sentiment_dissatisfied,
                   size: 50,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               Text(
                 'No results found',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.white),
               )
             ],
           )),
         );
       } else {
         return Container(
-          color: Colors.white,
+          color: Colors.blueGrey[800],
           child: ListView.builder(
             itemCount: filteredNotes.length == null ? 0 : filteredNotes.length,
             itemBuilder: (context, index) {
               return ListTile(
                 leading: Icon(
                   Icons.note,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 title: Text(
                   filteredNotes[index].title,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
-                      color: Colors.black),
+                      color: Colors.white),
                 ),
                 subtitle: Text(
                   filteredNotes[index].description,

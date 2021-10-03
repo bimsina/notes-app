@@ -30,16 +30,24 @@ class NoteListState extends State<NoteList> {
 
     Widget myAppBar() {
       return AppBar(
-        title: Text('Notes', style: Theme.of(context).textTheme.headline5),
+        title: Text(
+          'Notes',
+          //style: Theme.of(context).textTheme.headline5,
+          style: TextStyle(
+              fontFamily: 'Sans',
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 24),
+        ),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.blueGrey,
         leading: noteList.length == 0
             ? Container()
             : IconButton(
                 icon: Icon(
                   Icons.search,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
                 onPressed: () async {
                   final Note result = await showSearch(
@@ -55,7 +63,7 @@ class NoteListState extends State<NoteList> {
               : IconButton(
                   icon: Icon(
                     axisCount == 2 ? Icons.list : Icons.grid_on,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                   onPressed: () {
                     setState(() {
@@ -71,17 +79,19 @@ class NoteListState extends State<NoteList> {
       appBar: myAppBar(),
       body: noteList.length == 0
           ? Container(
-              color: Colors.white,
+              color: Colors.blueGrey[800],
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Text('Click on the add button to add a new note!',
-                      style: Theme.of(context).textTheme.bodyText2),
+                  child: Center(
+                    child: Text('Click on the add button to add a new note!',
+                        style: Theme.of(context).textTheme.bodyText2),
+                  ),
                 ),
               ),
             )
           : Container(
-              color: Colors.white,
+              color: Colors.blueGrey[800],
               child: getNotesList(),
             ),
       floatingActionButton: FloatingActionButton(
@@ -89,9 +99,12 @@ class NoteListState extends State<NoteList> {
           navigateToDetail(Note('', '', 3, 0), 'Add Note');
         },
         tooltip: 'Add Note',
-        shape: CircleBorder(side: BorderSide(color: Colors.black, width: 2.0)),
-        child: Icon(Icons.add, color: Colors.black),
-        backgroundColor: Colors.white,
+        //shape: CircleBorder(side: BorderSide(color: Colors.black, width: 2.0)),
+        child: Icon(
+          Icons.add,
+          color: Colors.blueGrey[800],
+        ),
+        backgroundColor: Colors.blueGrey[100],
       ),
     );
   }
@@ -111,7 +124,7 @@ class NoteListState extends State<NoteList> {
             padding: EdgeInsets.all(8.0),
             decoration: BoxDecoration(
                 color: colors[this.noteList[index].color],
-                border: Border.all(width: 2, color: Colors.black),
+                //order: Border.all(width: 2, color: Colors.black),
                 borderRadius: BorderRadius.circular(8.0)),
             child: Column(
               children: <Widget>[

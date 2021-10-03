@@ -47,7 +47,7 @@ class NoteDetailState extends State<NoteDetail> {
             ),
             backgroundColor: colors[color],
             leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                icon: Icon(Icons.arrow_back_ios, color: Colors.blueGrey[700],),
                 onPressed: () {
                   isEdited ? showDiscardDialog(context) : moveToLastScreen();
                 }),
@@ -55,7 +55,7 @@ class NoteDetailState extends State<NoteDetail> {
               IconButton(
                 icon: Icon(
                   Icons.save,
-                  color: Colors.black,
+                  color: Colors.blueGrey[700],
                 ),
                 onPressed: () {
                   titleController.text.length == 0
@@ -64,7 +64,7 @@ class NoteDetailState extends State<NoteDetail> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.delete, color: Colors.black),
+                icon: Icon(Icons.delete, color: Colors.blueGrey[700],),
                 onPressed: () {
                   showDeleteDialog(context);
                 },
@@ -149,7 +149,7 @@ class NoteDetailState extends State<NoteDetail> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
-                      .copyWith(color: Colors.purple)),
+                      .copyWith(color: Colors.blueGrey[700],)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -159,7 +159,7 @@ class NoteDetailState extends State<NoteDetail> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
-                      .copyWith(color: Colors.purple)),
+                      .copyWith(color: Colors.blueGrey[700],)),
               onPressed: () {
                 Navigator.of(context).pop();
                 moveToLastScreen();
@@ -190,7 +190,7 @@ class NoteDetailState extends State<NoteDetail> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
-                      .copyWith(color: Colors.purple)),
+                      .copyWith(color: Colors.blueGrey[700],)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -220,7 +220,7 @@ class NoteDetailState extends State<NoteDetail> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
-                      .copyWith(color: Colors.purple)),
+                      .copyWith(color: Colors.blueGrey[700],)),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -230,7 +230,7 @@ class NoteDetailState extends State<NoteDetail> {
                   style: Theme.of(context)
                       .textTheme
                       .bodyText2
-                      .copyWith(color: Colors.purple)),
+                      .copyWith(color: Colors.blueGrey[700],)),
               onPressed: () {
                 Navigator.of(context).pop();
                 _delete();

@@ -24,7 +24,7 @@ class PriorityPicker extends StatefulWidget {
 class _PriorityPickerState extends State<PriorityPicker> {
   int selectedIndex;
   List<String> priorityText = ['Low', 'High', 'Very High'];
-  List<Color> priorityColor = [Colors.green, Colors.lightGreen, Colors.red];
+  List<Color> priorityColor = [Colors.green, Colors.yellow, Colors.red];
   @override
   Widget build(BuildContext context) {
     if (selectedIndex == null) {
@@ -55,17 +55,18 @@ class _PriorityPickerState extends State<PriorityPicker> {
                       style: TextStyle(
                           color: selectedIndex == index
                               ? Colors.white
-                              : Colors.black,
+                              : Colors.blueGrey[700],
                           fontWeight: FontWeight.bold)),
                 ),
                 decoration: BoxDecoration(
-                    color: selectedIndex == index
-                        ? priorityColor[index]
-                        : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8.0),
-                    border: selectedIndex == index
+                  color: selectedIndex == index
+                      ? priorityColor[index]
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(8.0),
+                  /*border: selectedIndex == index
                         ? Border.all(width: 2, color: Colors.black)
-                        : Border.all(width: 0,color: Colors.transparent)),
+                        : Border.all(width: 0,color: Colors.transparent)*/
+                ),
               ),
             ),
           );
@@ -116,9 +117,16 @@ class _ColorPickerState extends State<ColorPicker> {
                         ? Icon(Icons.done)
                         : Container()),
                 decoration: BoxDecoration(
-                    color: colors[index],
-                    shape: BoxShape.circle,
-                    border: Border.all(width: 2, color: Colors.black)),
+                  color: colors[index],
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: Offset(0.0, 1.0), //(x,y)
+                      blurRadius: 6.0,
+                    ),
+                  ], /*border: Border.all(width: 2, color: Colors.black)*/
+                ),
               ),
             ),
           );
