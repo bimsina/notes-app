@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:notes_app/db_helper/db_helper.dart';
 import 'package:notes_app/modal_class/notes.dart';
+import 'package:notes_app/screens/note_about.dart';
 import 'package:notes_app/screens/note_detail.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:notes_app/screens/search_note.dart';
@@ -31,19 +32,19 @@ class NoteListState extends State<NoteList> {
     Widget myAppBar() {
       return AppBar(
         title: Text(
-          'Notes',
+          'MyNotes',
           //style: Theme.of(context).textTheme.headline5,
           style: TextStyle(
               fontFamily: 'Sans',
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontSize: 24),
+              fontSize: 20),
         ),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.blueGrey,
         leading: noteList.length == 0
-            ? Container()
+            ? SizedBox()
             : IconButton(
                 icon: Icon(
                   Icons.search,
@@ -51,7 +52,9 @@ class NoteListState extends State<NoteList> {
                 ),
                 onPressed: () async {
                   final Note result = await showSearch(
-                      context: context, delegate: NotesSearch(notes: noteList));
+                    context: context,
+                    delegate: NotesSearch(notes: noteList),
+                  );
                   if (result != null) {
                     navigateToDetail(result, 'Edit Note');
                   }
@@ -59,17 +62,48 @@ class NoteListState extends State<NoteList> {
               ),
         actions: <Widget>[
           noteList.length == 0
-              ? Container()
-              : IconButton(
+              ? IconButton(
                   icon: Icon(
-                    axisCount == 2 ? Icons.list : Icons.grid_on,
-                    color: Colors.white,
+                    Icons.info,
+                    color: Colors.blueGrey[700],
                   ),
                   onPressed: () {
-                    setState(() {
-                      axisCount = axisCount == 2 ? 4 : 2;
-                    });
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NoteAbout(),
+                      ),
+                    );
                   },
+                )
+              : Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.info,
+                        color: Colors.blueGrey[700],
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => NoteAbout(),
+                          ),
+                        );
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        axisCount == 2 ? Icons.list : Icons.grid_on,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          axisCount = axisCount == 2 ? 4 : 2;
+                        });
+                      },
+                    ),
+                  ],
                 )
         ],
       );
@@ -83,9 +117,9 @@ class NoteListState extends State<NoteList> {
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Center(
-                    child: Text('Click on the add button to add a new note!',
-                        style: Theme.of(context).textTheme.bodyText2),
+                  child: Text(
+                    'Click on the add button to add a new note!',
+                    style: Theme.of(context).textTheme.bodyText2,
                   ),
                 ),
               ),

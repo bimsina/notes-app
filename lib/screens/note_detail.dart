@@ -47,7 +47,10 @@ class NoteDetailState extends State<NoteDetail> {
             ),
             backgroundColor: colors[color],
             leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios, color: Colors.blueGrey[700],),
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.blueGrey[700],
+                ),
                 onPressed: () {
                   isEdited ? showDiscardDialog(context) : moveToLastScreen();
                 }),
@@ -64,7 +67,10 @@ class NoteDetailState extends State<NoteDetail> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.delete, color: Colors.blueGrey[700],),
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.blueGrey[700],
+                ),
                 onPressed: () {
                   showDeleteDialog(context);
                 },
@@ -146,20 +152,18 @@ class NoteDetailState extends State<NoteDetail> {
           actions: <Widget>[
             TextButton(
               child: Text("No",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      .copyWith(color: Colors.blueGrey[700],)),
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(
+                        color: Colors.blueGrey[700],
+                      )),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: Text("Yes",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      .copyWith(color: Colors.blueGrey[700],)),
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(
+                        color: Colors.blueGrey[700],
+                      )),
               onPressed: () {
                 Navigator.of(context).pop();
                 moveToLastScreen();
@@ -187,10 +191,9 @@ class NoteDetailState extends State<NoteDetail> {
           actions: <Widget>[
             TextButton(
               child: Text("Okay",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      .copyWith(color: Colors.blueGrey[700],)),
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(
+                        color: Colors.blueGrey[700],
+                      )),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -217,20 +220,18 @@ class NoteDetailState extends State<NoteDetail> {
           actions: <Widget>[
             TextButton(
               child: Text("No",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      .copyWith(color: Colors.blueGrey[700],)),
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(
+                        color: Colors.blueGrey[700],
+                      )),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             TextButton(
               child: Text("Yes",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      .copyWith(color: Colors.blueGrey[700],)),
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(
+                        color: Colors.blueGrey[700],
+                      )),
               onPressed: () {
                 Navigator.of(context).pop();
                 _delete();
