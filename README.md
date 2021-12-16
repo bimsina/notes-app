@@ -8,6 +8,9 @@
 </ul>
 
 Video Demo: https://www.youtube.com/watch?v=Fg68VND8unE <br><br>
+
+If you want to use firebase to store the notes online, check out this [repo](https://github.com/prabhashrai02/notes-app) .
+
 Screenshots:<br>
 <table style={border:"none"}><tr>
 <td><img src="https://user-images.githubusercontent.com/29589003/57538958-2ae63100-7369-11e9-9efc-102497249cdd.png" alt="Screenshot 2"/></td>
