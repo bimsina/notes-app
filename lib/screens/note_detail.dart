@@ -47,12 +47,14 @@ class NoteDetailState extends State<NoteDetail> {
             ),
             backgroundColor: colors[color],
             leading: IconButton(
+                splashRadius: 22,
                 icon: Icon(Icons.arrow_back_ios, color: Colors.black),
                 onPressed: () {
                   isEdited ? showDiscardDialog(context) : moveToLastScreen();
                 }),
             actions: <Widget>[
               IconButton(
+                splashRadius: 22,
                 icon: Icon(
                   Icons.save,
                   color: Colors.black,
@@ -64,6 +66,7 @@ class NoteDetailState extends State<NoteDetail> {
                 },
               ),
               IconButton(
+                splashRadius: 22,
                 icon: Icon(Icons.delete, color: Colors.black),
                 onPressed: () {
                   showDeleteDialog(context);

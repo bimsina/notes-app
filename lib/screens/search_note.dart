@@ -24,6 +24,7 @@ class NotesSearch extends SearchDelegate<Note> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
+        splashRadius: 22,
         icon: Icon(
           Icons.clear,
           color: Colors.black,
@@ -38,6 +39,7 @@ class NotesSearch extends SearchDelegate<Note> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
+      splashRadius: 22,
       icon: Icon(
         Icons.arrow_back,
         color: Colors.black,

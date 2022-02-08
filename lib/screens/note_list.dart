@@ -37,6 +37,7 @@ class NoteListState extends State<NoteList> {
         leading: noteList.length == 0
             ? Container()
             : IconButton(
+              splashRadius: 22,
                 icon: Icon(
                   Icons.search,
                   color: Colors.black,
@@ -53,6 +54,7 @@ class NoteListState extends State<NoteList> {
           noteList.length == 0
               ? Container()
               : IconButton(
+                splashRadius: 22,
                   icon: Icon(
                     axisCount == 2 ? Icons.list : Icons.grid_on,
                     color: Colors.black,
