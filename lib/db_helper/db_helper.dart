@@ -53,7 +53,7 @@ class DatabaseHelper {
 
   // Fetch Operation: Get all note objects from database
   Future<List<Map<String, dynamic>>> getNoteMapList() async {
-    Database db = await this.database;
+    Database db = await database;
 
 //		var result = await db.rawQuery('SELECT * FROM $noteTable order by $colPriority ASC');
     var result = await db.query(noteTable, orderBy: '$colPriority ASC');
@@ -62,14 +62,14 @@ class DatabaseHelper {
 
   // Insert Operation: Insert a Note object to database
   Future<int> insertNote(Note note) async {
-    Database db = await this.database;
+    Database db = await database;
     var result = await db.insert(noteTable, note.toMap());
     return result;
   }
 
   // Update Operation: Update a Note object and save it to database
   Future<int> updateNote(Note note) async {
-    var db = await this.database;
+    var db = await database;
     var result = await db.update(noteTable, note.toMap(),
         where: '$colId = ?', whereArgs: [note.id]);
     return result;
@@ -77,7 +77,7 @@ class DatabaseHelper {
 
   // Delete Operation: Delete a Note object from database
   Future<int> deleteNote(int id) async {
-    var db = await this.database;
+    var db = await database;
     int result =
         await db.rawDelete('DELETE FROM $noteTable WHERE $colId = $id');
     return result;
@@ -85,7 +85,7 @@ class DatabaseHelper {
 
   // Get number of Note objects in database
   Future<int> getCount() async {
-    Database db = await this.database;
+    Database db = await database;
     List<Map<String, dynamic>> x =
         await db.rawQuery('SELECT COUNT (*) from $noteTable');
     int result = Sqflite.firstIntValue(x);

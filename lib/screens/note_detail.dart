@@ -8,7 +8,7 @@ class NoteDetail extends StatefulWidget {
   final String appBarTitle;
   final Note note;
 
-  NoteDetail(this.note, this.appBarTitle);
+  const NoteDetail(this.note, this.appBarTitle, {Key key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -48,26 +48,26 @@ class NoteDetailState extends State<NoteDetail> {
             backgroundColor: colors[color],
             leading: IconButton(
                 splashRadius: 22,
-                icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+                icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
                 onPressed: () {
                   isEdited ? showDiscardDialog(context) : moveToLastScreen();
                 }),
             actions: <Widget>[
               IconButton(
                 splashRadius: 22,
-                icon: Icon(
+                icon: const Icon(
                   Icons.save,
                   color: Colors.black,
                 ),
                 onPressed: () {
-                  titleController.text.length == 0
+                  titleController.text.isEmpty
                       ? showEmptyTitleDialog(context)
                       : _save();
                 },
               ),
               IconButton(
                 splashRadius: 22,
-                icon: Icon(Icons.delete, color: Colors.black),
+                icon: const Icon(Icons.delete, color: Colors.black),
                 onPressed: () {
                   showDeleteDialog(context);
                 },
@@ -96,7 +96,7 @@ class NoteDetailState extends State<NoteDetail> {
                   },
                 ),
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: TextField(
                     controller: titleController,
                     maxLength: 255,
@@ -104,14 +104,14 @@ class NoteDetailState extends State<NoteDetail> {
                     onChanged: (value) {
                       updateTitle();
                     },
-                    decoration: InputDecoration.collapsed(
+                    decoration: const InputDecoration.collapsed(
                       hintText: 'Title',
                     ),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: TextField(
                       keyboardType: TextInputType.multiline,
                       maxLines: 10,
@@ -121,7 +121,7 @@ class NoteDetailState extends State<NoteDetail> {
                       onChanged: (value) {
                         updateDescription();
                       },
-                      decoration: InputDecoration.collapsed(
+                      decoration: const InputDecoration.collapsed(
                         hintText: 'Description',
                       ),
                     ),
@@ -138,8 +138,8 @@ class NoteDetailState extends State<NoteDetail> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          shape: const RoundedRectangleBorder(
+              borderRadius:  BorderRadius.all(Radius.circular(10.0))),
           title: Text(
             "Discard Changes?",
             style: Theme.of(context).textTheme.bodyText2,
@@ -179,7 +179,7 @@ class NoteDetailState extends State<NoteDetail> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0))),
           title: Text(
             "Title is empty!",
@@ -209,8 +209,8 @@ class NoteDetailState extends State<NoteDetail> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all( Radius.circular(10.0))),
           title: Text(
             "Delete Note?",
             style: Theme.of(context).textTheme.bodyText2,

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/screens/note_list.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           headline5: TextStyle(
               fontFamily: 'Sans',
               fontWeight: FontWeight.bold,
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
               fontSize: 14),
         ),
       ),
-      home: NoteList(),
+      home: const NoteList(),
     );
   }
 }

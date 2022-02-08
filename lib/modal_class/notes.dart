@@ -23,30 +23,30 @@ class Note {
 
   set title(String newTitle) {
     if (newTitle.length <= 255) {
-      this._title = newTitle;
+      _title = newTitle;
     }
   }
 
   set description(String newDescription) {
     if (newDescription.length <= 255) {
-      this._description = newDescription;
+      _description = newDescription;
     }
   }
 
   set priority(int newPriority) {
     if (newPriority >= 1 && newPriority <= 3) {
-      this._priority = newPriority;
+      _priority = newPriority;
     }
   }
 
   set color(int newColor) {
     if (newColor >= 0 && newColor <= 9) {
-      this._color = newColor;
+      _color = newColor;
     }
   }
 
   set date(String newDate) {
-    this._date = newDate;
+    _date = newDate;
   }
 
   // Convert a Note object into a Map object
@@ -66,11 +66,11 @@ class Note {
 
   // Extract a Note object from a Map object
   Note.fromMapObject(Map<String, dynamic> map) {
-    this._id = map['id'];
-    this._title = map['title'];
-    this._description = map['description'];
-    this._priority = map['priority'];
-    this._color = map['color'];
-    this._date = map['date'];
+    _id = map['id'];
+    _title = map['title'];
+    _description = map['description'];
+    _priority = map['priority'];
+    _color = map['color'];
+    _date = map['date'];
   }
 }
