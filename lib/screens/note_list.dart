@@ -9,6 +9,8 @@ import 'package:notes_app/utils/widgets.dart';
 import 'package:sqflite/sqflite.dart';
 
 class NoteList extends StatefulWidget {
+  const NoteList({Key key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     return NoteListState();
@@ -34,10 +36,11 @@ class NoteListState extends State<NoteList> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: noteList.length == 0
+        leading: noteList.isEmpty
             ? Container()
             : IconButton(
-                icon: Icon(
+                splashRadius: 22,
+                icon: const Icon(
                   Icons.search,
                   color: Colors.black,
                 ),
@@ -50,9 +53,10 @@ class NoteListState extends State<NoteList> {
                 },
               ),
         actions: <Widget>[
-          noteList.length == 0
+          noteList.isEmpty
               ? Container()
               : IconButton(
+                  splashRadius: 22,
                   icon: Icon(
                     axisCount == 2 ? Icons.list : Icons.grid_on,
                     color: Colors.black,
@@ -69,7 +73,7 @@ class NoteListState extends State<NoteList> {
 
     return Scaffold(
       appBar: myAppBar(),
-      body: noteList.length == 0
+      body: noteList.isEmpty
           ? Container(
               color: Colors.white,
               child: Center(
@@ -89,8 +93,9 @@ class NoteListState extends State<NoteList> {
           navigateToDetail(Note('', '', 3, 0), 'Add Note');
         },
         tooltip: 'Add Note',
-        shape: CircleBorder(side: BorderSide(color: Colors.black, width: 2.0)),
-        child: Icon(Icons.add, color: Colors.black),
+        shape: const CircleBorder(
+            side: BorderSide(color: Colors.black, width: 2.0)),
+        child: const Icon(Icons.add, color: Colors.black),
         backgroundColor: Colors.white,
       ),
     );
@@ -98,19 +103,19 @@ class NoteListState extends State<NoteList> {
 
   Widget getNotesList() {
     return StaggeredGridView.countBuilder(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       crossAxisCount: 4,
       itemCount: count,
       itemBuilder: (BuildContext context, int index) => GestureDetector(
         onTap: () {
-          navigateToDetail(this.noteList[index], 'Edit Note');
+          navigateToDetail(noteList[index], 'Edit Note');
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
-                color: colors[this.noteList[index].color],
+                color: colors[noteList[index].color],
                 border: Border.all(width: 2, color: Colors.black),
                 borderRadius: BorderRadius.circular(8.0)),
             child: Column(
@@ -122,16 +127,15 @@ class NoteListState extends State<NoteList> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          this.noteList[index].title,
+                          noteList[index].title,
                           style: Theme.of(context).textTheme.bodyText2,
                         ),
                       ),
                     ),
                     Text(
-                      getPriorityText(this.noteList[index].priority),
+                      getPriorityText(noteList[index].priority),
                       style: TextStyle(
-                          color:
-                              getPriorityColor(this.noteList[index].priority)),
+                          color: getPriorityColor(noteList[index].priority)),
                     ),
                   ],
                 ),
@@ -142,9 +146,7 @@ class NoteListState extends State<NoteList> {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                            this.noteList[index].description == null
-                                ? ''
-                                : this.noteList[index].description,
+                            noteList[index].description ?? '',
                             style: Theme.of(context).textTheme.bodyText1),
                       )
                     ],
@@ -153,7 +155,7 @@ class NoteListState extends State<NoteList> {
                 Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Text(this.noteList[index].date,
+                      Text(noteList[index].date,
                           style: Theme.of(context).textTheme.subtitle2),
                     ])
               ],
@@ -232,7 +234,7 @@ class NoteListState extends State<NoteList> {
       noteListFuture.then((noteList) {
         setState(() {
           this.noteList = noteList;
-          this.count = noteList.length;
+          count = noteList.length;
         });
       });
     });
