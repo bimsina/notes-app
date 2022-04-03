@@ -7,6 +7,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:notes_app/screens/search_note.dart';
 import 'package:notes_app/utils/widgets.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:notes_app/main.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 class NoteList extends StatefulWidget {
   const NoteList({Key key}) : super(key: key);
@@ -73,6 +75,52 @@ class NoteListState extends State<NoteList> {
 
     return Scaffold(
       appBar: myAppBar(),
+      endDrawer: Drawer(
+        child: Container(
+          child: SettingsList(
+                sections: [
+                  SettingsSection(
+                    title: const Text('Settings'),
+                    tiles: [
+                      SettingsTile(
+                        title: const Text('Language'),
+                        description: const Text('English'),
+                        leading: const Icon(Icons.language),
+                        onPressed: (BuildContext context) {},
+                      ),
+                      SettingsTile.switchTile(
+                        title: const Text('Use System Theme'),
+                        leading: const Icon(Icons.phone_android),
+                        enabled: true,
+                        onToggle: (value) {
+                          setState(() {
+                            //isSwitched = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  SettingsSection(
+                    title: const Text('Security'),
+                    tiles: [
+                      SettingsTile(
+                        title: const Text('Security'),
+                        description: const Text('Fingerprint'),
+                        leading: const Icon(Icons.lock),
+                        onPressed: (BuildContext context) {},
+                      ),
+                      SettingsTile.switchTile(
+                        title: const Text('Use fingerprint'),
+                        leading: const Icon(Icons.fingerprint),
+                        enabled: true,
+                        onToggle: (value) {},
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+          ),
+        ),
       body: noteList.isEmpty
           ? Container(
               color: Colors.white,
@@ -145,8 +193,7 @@ class NoteListState extends State<NoteList> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
-                        child: Text(
-                            noteList[index].description ?? '',
+                        child: Text(noteList[index].description ?? '',
                             style: Theme.of(context).textTheme.bodyText1),
                       )
                     ],
