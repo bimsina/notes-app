@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:notes_app/db_helper/db_helper.dart';
 import 'package:notes_app/modal_class/notes.dart';
 import 'package:notes_app/utils/widgets.dart';
+import 'package:favorite_button/favorite_button.dart';
 
 class NoteDetail extends StatefulWidget {
   final String appBarTitle;
@@ -53,6 +54,11 @@ class NoteDetailState extends State<NoteDetail> {
                   isEdited ? showDiscardDialog(context) : moveToLastScreen();
                 }),
             actions: <Widget>[
+              StarButton(
+                isStarred: false,
+                valueChanged: (_isStarred) {
+                },
+              ),
               IconButton(
                 splashRadius: 22,
                 icon: const Icon(
